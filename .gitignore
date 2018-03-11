@@ -9,7 +9,7 @@ node_modules
 
 # production
 /build
-/src/server/config/private.js
+private.js
 # misc
 .DS_Store
 .env.local
