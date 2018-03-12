@@ -2,24 +2,14 @@ import React from 'react';
 import FieldGroup from './FieldGroup';
 import Button from '../components/Button';
 
-const SignUp = () => {
+const SignIn = () => {
 	return (
 		<div className='container'>
 			<form>
 				<FieldGroup
-					id='fieldName'
-					type='text'
-					label='Ваше имя'
-				/>
-				<FieldGroup
-					id='fieldFamily'
-					type='text'
-					label='Ваша фамилия'
-				/>
-				<FieldGroup
 					id='fieldLogin'
 					type='text'
-					label='Ваш логин'
+					label='Ваш логин на сайте'
 				/>
 				<FieldGroup
 					id='fieldPassword'
@@ -27,7 +17,7 @@ const SignUp = () => {
 					label='Пароль'
 				/>
 				<Button
-					label='Сохранить'
+					label='Отправить'
 					type='success'
 				/>
 			</form>
@@ -35,4 +25,4 @@ const SignUp = () => {
 	)
 };
 
-export default SignUp;
+export default SignIn;
