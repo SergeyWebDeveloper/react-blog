@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
-import {Navbar,NavItem,Nav} from 'react-bootstrap';
+import {Navbar, NavItem, Nav} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import {LinkContainer} from 'react-router-bootstrap';
 
 class Header extends Component {
 	render() {
@@ -8,16 +10,20 @@ class Header extends Component {
 				<Navbar>
 					<Navbar.Header>
 						<Navbar.Brand>
-							<a href="#">React-Блог</a>
+							<Link to="/">React-Блог</Link>
 						</Navbar.Brand>
 					</Navbar.Header>
 					<Nav pullLeft>
-						<NavItem eventKey={1} href="#">
-							Регистрация
-						</NavItem>
-						<NavItem eventKey={2} href="#">
-							Войти
-						</NavItem>
+						<LinkContainer to='/signup'>
+							<NavItem eventKey={1}>
+								Регистрация
+							</NavItem>
+						</LinkContainer>
+						<LinkContainer to='/signin'>
+							<NavItem eventKey={2}>
+								Войти
+							</NavItem>
+						</LinkContainer>
 					</Nav>
 				</Navbar>
 			</header>
