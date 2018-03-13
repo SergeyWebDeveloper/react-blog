@@ -10,9 +10,10 @@ class PageSignUp extends Component {
 
 	submitForm = async value =>{
 		const {data} = await createUser(value);
-		if(data.error){
-			this.setState({error: true});
-		}
+		console.log(data);
+		// if(data.error){
+		// 	this.setState({error: true});
+		// }
 	};
 
 	messageErrorShow = () =>{

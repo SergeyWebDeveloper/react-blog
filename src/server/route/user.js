@@ -1,13 +1,14 @@
 import {User} from '../models/user';
+import {verificationUser} from '../middlewars/verificationUser';
 
 export const userRouting = (app) => {
-	app.post('/api/newuser', async (req,res)=>{
-		const dataUser = await req.body;
+	app.post('/api/newuser', verificationUser, async (req, res) => {
+		const dataUser = req.body;
 		const user = await new User({
 			login: dataUser.login,
 			password: dataUser.password
 		});
-		await user.save((err)=>{
+		await user.save((err) => {
 			err ? res.send({error: true}) : res.send({error: false});
 		});
 	});
