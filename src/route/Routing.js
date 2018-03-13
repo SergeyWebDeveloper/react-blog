@@ -4,7 +4,7 @@ import {
 	Route
 } from 'react-router-dom';
 
-import SignUp from '../components/SignUp';
+import PageSignUp from '../pages/PageSignUp';
 import SignIn from '../components/SignIn';
 
 const HomePage = () => 'Home Page';
@@ -13,7 +13,7 @@ const Routing = () => {
 	return (
 		<Switch>
 			<Route exact path='/' component={HomePage}/>
-			<Route path='/signup' component={SignUp}/>
+			<Route path='/signup' component={PageSignUp}/>
 			<Route path='/signin' component={SignIn}/>
 		</Switch>
 	)

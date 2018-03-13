@@ -9,4 +9,4 @@ const articleSchema = new Schema({
 	date: Number
 });
 
-export const Article = mongoose.model('Article',articleSchema);
+export const Article = mongoose.model('articles',articleSchema);
