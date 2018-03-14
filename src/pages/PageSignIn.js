@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import SignInForm from '../components/forms/SignInForm';
-
+import {loginUser} from '../api';
 class PageSignIn extends Component {
 
-	submitForm = (values) => {
-		console.log(values);
+	submitForm = async (values) => {
+		const data = await loginUser(values);
+		console.log('response--',data);
 	};
 
 	render(){
