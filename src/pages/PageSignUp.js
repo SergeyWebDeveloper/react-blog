@@ -1,6 +1,6 @@
 import React, {Component,Fragment} from 'react';
 import {Redirect} from 'react-router-dom';
-import SignUp from '../components/SignUpForm';
+import SignUpForm from '../components/forms/SignUpForm';
 import {createUser} from '../api';
 
 class PageSignUp extends Component {
@@ -41,13 +41,17 @@ class PageSignUp extends Component {
 	render(){
 		return(
 			<div className='container'>
-				<h1>Зарегистрироваться</h1>
-				<SignUp onSubmit={this.submitForm} />
+				<h1>{this.props.title}</h1>
+				<SignUpForm onSubmit={this.submitForm} />
 				{this.state.error&&this.messageErrorShow()}
 				{this.state.success&&<Redirect to='/signin'/>}
 			</div>
 		)
 	}
 }
+
+PageSignUp.defaultProps = {
+	title: 'Зарегистрироваться'
+};
 
 export default PageSignUp;

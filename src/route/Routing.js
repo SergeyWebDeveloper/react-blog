@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 
 import PageSignUp from '../pages/PageSignUp';
-import SignIn from '../components/SignIn';
+import PageSignIn from '../pages/PageSignIn';
 
 const HomePage = () => 'Home Page';
 
@@ -14,7 +14,7 @@ const Routing = () => {
 		<Switch>
 			<Route exact path='/' component={HomePage}/>
 			<Route path='/signup' component={PageSignUp}/>
-			<Route path='/signin' component={SignIn}/>
+			<Route path='/signin' component={PageSignIn}/>
 		</Switch>
 	)
 };

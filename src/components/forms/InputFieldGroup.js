@@ -7,9 +7,9 @@ const FieldGroup = ({ input, id, label, meta: { touched, error }, ...props}) => 
 			<ControlLabel>{label}</ControlLabel>
 			<FormControl
 				{...props}
-				errortext={touched && error ? error : null}
 				{...input}
 			/>
+			{touched && error}
 		</FormGroup>
 	)
 };

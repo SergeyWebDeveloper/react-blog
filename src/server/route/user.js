@@ -6,7 +6,9 @@ export const userRouting = (app) => {
 		const dataUser = req.body;
 		const user = await new User({
 			login: dataUser.login,
-			password: dataUser.password
+			password: dataUser.password,
+			name: dataUser.name,
+			family: dataUser.family
 		});
 		await user.save((err) => {
 			err ? res.send({error: true}) : res.send({error: false});
