@@ -1,5 +1,5 @@
 import React from 'react';
-import FieldGroup from './FieldGroup';
+import FieldGroup from './InputFieldGroup';
 import Button from '../components/Button';
 
 const SignIn = () => {

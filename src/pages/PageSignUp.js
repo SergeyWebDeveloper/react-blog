@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component,Fragment} from 'react';
 import {Redirect} from 'react-router-dom';
 import SignUp from '../components/SignUpForm';
 import {createUser} from '../api';
@@ -31,7 +31,10 @@ class PageSignUp extends Component {
 
 	messageErrorShow = () =>{
 		return(
-			<p>В резальтате сохранения произошла ошибка! Попробуйте заново. {this.state.message}</p>
+			<Fragment>
+				<p>В резальтате сохранения произошла ошибка! Попробуйте заново.</p>
+				<strong>{this.state.message}</strong>
+			</Fragment>
 		);
 	};
 

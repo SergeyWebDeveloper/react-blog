@@ -1,11 +1,15 @@
 import React from 'react';
 import {FormGroup,ControlLabel,FormControl} from 'react-bootstrap';
 
-const FieldGroup = ({ id, label, ...props}) => {
+const FieldGroup = ({ input, id, label, meta: { touched, error }, ...props}) => {
 	return (
 		<FormGroup controlId={id}>
 			<ControlLabel>{label}</ControlLabel>
-			<FormControl {...props} />
+			<FormControl
+				{...props}
+				errortext={touched && error ? error : null}
+				{...input}
+			/>
 		</FormGroup>
 	)
 };
