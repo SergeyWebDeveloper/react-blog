@@ -1,5 +1,6 @@
 import {User} from '../models/user';
 import {verificationUser} from '../middlewars/verificationUser';
+import passport from "passport/lib/index";
 
 export const userRouting = (app) => {
 	app.post('/api/newuser', verificationUser, async (req, res) => {
@@ -14,4 +15,22 @@ export const userRouting = (app) => {
 			err ? res.send({error: true}) : res.send({error: false});
 		});
 	});
+
+	app.post('/api/login',
+		passport.authenticate('local'),
+		(req, res) => {
+			res.redirect('/');
+		});
+
+	app.get('/api/login', (req, res) => {
+		res.send(req.user);
+	});
+
+	app.get('/api/logout', (req, res) => {
+		req.logout();
+		res.redirect('/');
+	});
+
 };
+
+
