@@ -6,6 +6,6 @@ export const createUser = values => {
 };
 
 export const loginUser = values => {
-	return axios.post('/api/loginuser',values)
+	return axios.post('/api/login',values)
 		.then(response=>response);
-}
+};

@@ -6,8 +6,8 @@ passport.use(new Strategy({
 		usernameField:"login",
 		passwordField:"password"
 	},
-	function (login, password, cb) {
-		User.findOne({login:login}, function (err, user) {
+	async (login, password, cb) => {
+		await User.findOne({login:login}, function (err, user) {
 			if (err) {
 				return cb(err);
 			}
