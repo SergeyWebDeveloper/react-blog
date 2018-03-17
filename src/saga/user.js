@@ -1,18 +1,19 @@
 import {put, call} from 'redux-saga/effects';
 import {
 	FETCH_USER__SUCCESS,
-	CURRENT_USER_SUCCESS
+	CURRENT_USER_SUCCESS,
+	EXIT_ACCOUNT_SUCCESS
 } from '../constants';
 
 import {
 	loginUser,
-	checkCurrentUser
+	checkCurrentUser,
+	exitUser
 } from "../api";
 
 
 export function* userInfo(action) {
 	const {data} = yield call(loginUser, action.payload);
-	console.log(data);
 	if (data) {
 		yield put({
 			type: FETCH_USER__SUCCESS,
@@ -30,4 +31,14 @@ export function* currentUser() {
 			payload: data
 		})
 	}
+}
+
+export function* exitAccount() {
+	const {data} = yield call(exitUser);
+	if(data.exit){
+		yield put({
+			type: EXIT_ACCOUNT_SUCCESS
+		});
+	}
+
 }

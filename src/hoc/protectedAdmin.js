@@ -7,7 +7,7 @@ export function hocProtectedAdmin(Component) {
 		render() {
 			return (
 				<Fragment>
-					<Component {...this.props.user} />
+					<Component user={this.props.user} />
 					{!this.props.user.auth&&<Redirect to='/signin' />}
 				</Fragment>
 			)

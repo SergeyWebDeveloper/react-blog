@@ -1,11 +1,16 @@
 import React, {Component, Fragment} from 'react'
-import {Navbar, NavItem, Nav} from 'react-bootstrap';
-import {Link,withRouter} from 'react-router-dom';
+import {Navbar, NavItem, Nav, Label} from 'react-bootstrap';
+import {Link, withRouter} from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
 import {connect} from 'react-redux';
+import {exitAccount} from '../actions';
 
 
 class Header extends Component {
+
+	exitAccount = () =>{
+		this.props.exitAccount();
+	};
 
 	renderAuthMenu() {
 		const {auth} = this.props.user;
@@ -35,14 +40,22 @@ class Header extends Component {
 								Админка
 							</NavItem>
 						</LinkContainer>
-						<LinkContainer to='/logout'>
-							<NavItem eventKey={4}>
+							<NavItem eventKey={4} onClick={this.exitAccount}>
 								Выход
 							</NavItem>
-						</LinkContainer>
 					</Fragment>
 				)
 		}
+	}
+
+	showLogin(){
+		return(
+			<Nav pullRight>
+				<NavItem eventKey={5}>
+					Ваш логин <Label bsStyle="primary">{this.props.user.info.login}</Label>
+				</NavItem>
+			</Nav>
+		)
 	}
 
 	render() {
@@ -57,6 +70,7 @@ class Header extends Component {
 					<Nav pullLeft>
 						{this.renderAuthMenu()}
 					</Nav>
+					{this.props.user.auth&&this.showLogin()}
 				</Navbar>
 			</header>
 		)
@@ -67,4 +81,4 @@ const mapStateToProps = ({user}) => {
 	return {user};
 };
 
-export default withRouter(connect(mapStateToProps, null)(Header));
+export default withRouter(connect(mapStateToProps, {exitAccount})(Header));

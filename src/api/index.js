@@ -19,3 +19,8 @@ export async function checkCurrentUser() {
 	return await axios.get('/api/login')
 		.then(response=>response);
 }
+
+export async function exitUser() {
+	return await axios.get('/api/logout')
+		.then(response=>response);
+}
