@@ -1,14 +1,14 @@
 import React, {Component, Fragment} from 'react'
 import {Navbar, NavItem, Nav} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
 import {connect} from 'react-redux';
+
 
 class Header extends Component {
 
 	renderAuthMenu() {
 		const {auth} = this.props.user;
-		console.log(auth);
 		switch (auth) {
 			case null:
 				return;
@@ -67,4 +67,4 @@ const mapStateToProps = ({user}) => {
 	return {user};
 };
 
-export default connect(mapStateToProps, null)(Header);
+export default withRouter(connect(mapStateToProps, null)(Header));
