@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import SignInForm from '../components/forms/SignInForm';
 import {signInUser} from '../actions';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
+
 
 class PageSignIn extends Component {
 

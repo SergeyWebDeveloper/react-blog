@@ -12,6 +12,7 @@ import {
 
 export function* userInfo(action) {
 	const {data} = yield call(loginUser, action.payload);
+	console.log(data);
 	if (data) {
 		yield put({
 			type: FETCH_USER__SUCCESS,
