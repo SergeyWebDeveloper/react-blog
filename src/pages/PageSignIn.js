@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import SignInForm from '../components/forms/SignInForm';
-import {loginUser} from '../api';
+import {signInUser} from '../actions';
+import {connect} from 'react-redux';
+
 class PageSignIn extends Component {
 
-	submitForm = async (values) => {
-		const data = await loginUser(values);
-		console.log('response--',data);
+	submitForm = (values) => {
+		this.props.signInUser(values);
 	};
 
 	render(){
@@ -22,4 +23,4 @@ PageSignIn.defaultProps={
 	title: 'Войти в личный кабинет'
 };
 
-export default PageSignIn;
+export default connect(null,{signInUser})(PageSignIn);

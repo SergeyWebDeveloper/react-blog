@@ -5,7 +5,14 @@ export const createUser = values => {
 		.then(response=>response);
 };
 
-export const loginUser = values => {
-	return axios.post('/api/login',values)
+// export async loginUser = values => {
+// 	return axios.post('/api/login',values)
+// 		.then(response=>response);
+// };
+
+export async function loginUser(values) {
+	console.log('loginUser', values);
+	const data = await axios.post('/api/login',values)
 		.then(response=>response);
-};
+	return data;
+}

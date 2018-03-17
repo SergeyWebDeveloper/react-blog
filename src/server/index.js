@@ -1,7 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import cookieSession from 'cookie-session';
+import cookieParser from 'cookie-parser';
+import expressSession from 'express-session';
 import passport from 'passport';
 import settings from './config';
 import key from './config/private';
@@ -15,15 +16,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// app.use(
-// 	cookieSession({
-// 		maxAge: 30 * 24 * 60 * 60 * 1000,
-// 		keys: [key.secretCookie]
-// 	})
-// );
-
-app.use(require('cookie-parser')());
-app.use(require('express-session')({ secret: 'adasdsd as45 46a5s4d', resave: false, saveUninitialized: false }));
+app.use(cookieParser());
+app.use(expressSession({ secret: key.secretCookie, resave: false, saveUninitialized: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());

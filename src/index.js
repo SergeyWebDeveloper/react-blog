@@ -11,7 +11,7 @@ import {ConnectedRouter, routerMiddleware} from 'react-router-redux';
 
 import App from './containers/App';
 import reducer from './reducers';
-// import {rootSaga} from './saga/rootSaga';
+import {rootSaga} from './saga/rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 export const history = createHistory();
@@ -21,7 +21,8 @@ export const store = createStore(
 	reducer,
 	composeWithDevTools(applyMiddleware(sagaMiddleware,middleware))
 );
-// sagaMiddleware.run(rootSaga);
+
+sagaMiddleware.run(rootSaga);
 
 render(
 	<Provider store={store}>

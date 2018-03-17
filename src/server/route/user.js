@@ -19,7 +19,7 @@ export const userRouting = (app) => {
 	app.post('/api/login',
 		passport.authenticate('local'),
 		(req, res) => {
-			res.redirect('/');
+			res.send(req.user);
 		});
 
 	app.get('/api/login', (req, res) => {

@@ -2,8 +2,10 @@ import React, {Component} from 'react'
 import {Navbar, NavItem, Nav} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
+import {connect} from 'react-redux';
 
 class Header extends Component {
+
 	render() {
 		return (
 			<header>
