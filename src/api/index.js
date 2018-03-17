@@ -11,8 +11,11 @@ export const createUser = values => {
 // };
 
 export async function loginUser(values) {
-	console.log('loginUser', values);
-	const data = await axios.post('/api/login',values)
+	return await axios.post('/api/login',values)
 		.then(response=>response);
-	return data;
+}
+
+export async function checkCurrentUser() {
+	return await axios.get('/api/login')
+		.then(response=>response);
 }

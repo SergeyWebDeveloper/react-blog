@@ -1,14 +1,18 @@
-import {put,call} from 'redux-saga/effects';
+import {put, call} from 'redux-saga/effects';
 import {
-	FETCH_USER__SUCCESS
+	FETCH_USER__SUCCESS,
+	CURRENT_USER_SUCCESS
 } from '../constants';
 
-import {loginUser} from "../api";
+import {
+	loginUser,
+	checkCurrentUser
+} from "../api";
 
 
 export function* userInfo(action) {
-	const {data} = yield call(loginUser,action.payload);
-	if(data){
+	const {data} = yield call(loginUser, action.payload);
+	if (data) {
 		yield put({
 			type: FETCH_USER__SUCCESS,
 			payload: data
@@ -16,3 +20,13 @@ export function* userInfo(action) {
 	}
 }
 
+
+export function* currentUser() {
+	const {data} = yield call(checkCurrentUser);
+	if (data) {
+		yield put({
+			type: CURRENT_USER_SUCCESS,
+			payload: data
+		})
+	}
+}
