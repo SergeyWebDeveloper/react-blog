@@ -7,6 +7,7 @@ import passport from 'passport';
 import settings from './config';
 import key from './config/private';
 import {userRouting} from './route/user';
+import {articleRouting} from './route/article';
 
 import './auth/passport';
 
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 });
 
 userRouting(app);
+articleRouting(app);
 
 
 if(process.env.NODE_ENV==='production') {

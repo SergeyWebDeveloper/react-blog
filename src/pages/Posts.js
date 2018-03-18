@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {ButtonGroup, Modal} from 'react-bootstrap';
 import Button from '../components/Button';
 import AddPostForm from '../components/forms/AddPostForm';
+import {addPost} from '../api';
+import {connect} from 'react-redux';
 
 class Posts extends Component {
 
@@ -18,7 +20,14 @@ class Posts extends Component {
 	};
 
 	submitForm = values => {
-		console.log(values);
+		const {family,name,_id} = this.props.user.info;
+		const infoAuthor = {
+			author: `${family} ${name}`,
+			date: Date.now(),
+			idAuthor: _id
+		};
+		// console.log(Object.assign({},infoAuthor,values));
+		const {data} = addPost(Object.assign({},infoAuthor,values));
 	};
 
 	componentDidMount() {
@@ -52,4 +61,8 @@ class Posts extends Component {
 	}
 }
 
-export default Posts;
+const mapStateToProps = ({user}) => {
+	return {user};
+};
+
+export default connect(mapStateToProps,null)(Posts);

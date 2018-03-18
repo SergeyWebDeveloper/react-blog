@@ -2,7 +2,7 @@ import {User} from '../models/user';
 import {verificationUser} from '../middlewars/verificationUser';
 import passport from "passport/lib/index";
 
-export const userRouting = (app) => {
+export const userRouting = app => {
 	app.post('/api/newuser', verificationUser, async (req, res) => {
 		const dataUser = req.body;
 		const user = await new User({
