@@ -31,6 +31,11 @@ export const userRouting = app => {
 		res.send({exit: true})
 	});
 
+	app.post('/api/adminpost',(req,res)=>{
+		console.log(req.body);
+		res.send({success: true});
+	});
+
 };
 
 

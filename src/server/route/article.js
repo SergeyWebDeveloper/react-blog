@@ -20,9 +20,7 @@ export const articleRouting = app => {
 						res.send({error: true});
 					}
 				});
-				res.send({
-					success: true
-				});
+				res.send({error: false});
 			}
 		});
 	})

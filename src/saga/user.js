@@ -2,13 +2,16 @@ import {put, call} from 'redux-saga/effects';
 import {
 	FETCH_USER__SUCCESS,
 	CURRENT_USER_SUCCESS,
-	EXIT_ACCOUNT_SUCCESS
+	EXIT_ACCOUNT_SUCCESS,
+	LOAD_ARTICLES_ADMIN_SUCCESS,
+	LOAD_ARTICLES_ADMIN_FAIL
 } from '../constants';
 
 import {
 	loginUser,
 	checkCurrentUser,
-	exitUser
+	exitUser,
+	loadArticlesAdmin
 } from "../api";
 
 
@@ -40,5 +43,10 @@ export function* exitAccount() {
 			type: EXIT_ACCOUNT_SUCCESS
 		});
 	}
+}
 
+export function* fetchArticlesAdmin(action) {
+	console.log('ID',action.payload);
+	const {data} = yield call(loadArticlesAdmin,action.payload);
+	console.log(data);
 }

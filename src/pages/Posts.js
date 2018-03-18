@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {ButtonGroup, Modal} from 'react-bootstrap';
 import Button from '../components/Button';
 import AddPostForm from '../components/forms/AddPostForm';
-import {addPost} from '../api';
 import {connect} from 'react-redux';
+import {addPost,loadArticlesAdmin} from '../actions';
 
 class Posts extends Component {
 
@@ -20,18 +20,23 @@ class Posts extends Component {
 	};
 
 	submitForm = values => {
-		const {family,name,_id} = this.props.user.info;
+		const {family, name, _id} = this.props.user.info;
 		const infoAuthor = {
 			author: `${family} ${name}`,
 			date: Date.now(),
 			idAuthor: _id
 		};
-		// console.log(Object.assign({},infoAuthor,values));
-		const {data} = addPost(Object.assign({},infoAuthor,values));
+		const data = Object.assign({}, infoAuthor, values);
+		this.props.addPost(data);
+		if (values.title.trim().length && values.body.trim().length) {
+			this.handleClose();
+		}
 	};
 
 	componentDidMount() {
-
+		if(this.props.user.info._id){
+			this.props.loadArticlesAdmin(this.props.user.info._id);
+		}
 	}
 
 	modal = () => {
@@ -56,13 +61,14 @@ class Posts extends Component {
 					<Button label='Создать пост' type='success' onClick={this.handleShow}/>
 					{this.modal()}
 				</ButtonGroup>
+
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = ({user}) => {
-	return {user};
+const mapStateToProps = ({user,articles}) => {
+	return {user,articles};
 };
 
-export default connect(mapStateToProps,null)(Posts);
+export default connect(mapStateToProps, {addPost,loadArticlesAdmin})(Posts);
