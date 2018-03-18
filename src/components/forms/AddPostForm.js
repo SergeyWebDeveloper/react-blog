@@ -1,16 +1,16 @@
 import React from 'react';
-import Button from '../Button';
-import {fieldSignIn} from "./fieldsForm/fieldsSignIn";
 import {mapFieldsRender} from "./fieldsForm/renderFieldForms";
+import {fieldAddPost} from "./fieldsForm/fieldsAddPost";
 import {reduxForm} from "redux-form";
+import Button from '../Button';
 
-const SignIn = props => {
+const AddPost = props => {
 	const {handleSubmit} = props;
 	return (
 		<form onSubmit={handleSubmit}>
-			{mapFieldsRender(fieldSignIn)}
+			{mapFieldsRender(fieldAddPost)}
 			<Button
-				label='Войти'
+				label='Сохранить'
 				type='success'
 			/>
 		</form>
@@ -18,5 +18,5 @@ const SignIn = props => {
 };
 
 export default reduxForm({
-	form: 'signin'
-})(SignIn);
+	form: 'addpost'
+})(AddPost);
