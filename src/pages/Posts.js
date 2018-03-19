@@ -6,6 +6,7 @@ import _ from 'lodash';
 import Button from '../components/Button';
 import AddPostForm from '../components/forms/AddPostForm';
 import {Post} from '../components/Post';
+import {Loader} from '../components/Loader';
 import {addPost, loadArticlesAdmin} from '../actions';
 
 class Posts extends Component {
@@ -67,6 +68,7 @@ class Posts extends Component {
 							{this.modal()}
 						</ButtonGroup>
 					</div>
+					{this.props.articles.loading && <Loader/>}
 					<div className="posts__wrapper">
 						{_.map(this.props.articles.post, (post) => {
 							return <Post key={post._id} {...post} />
