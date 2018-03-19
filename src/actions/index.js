@@ -32,9 +32,8 @@ export const addPost = (info) => {
 	}
 };
 
-export const loadArticlesAdmin = (id) => {
+export const loadArticlesAdmin = () => {
 	return {
-		type: LOAD_ARTICLES_ADMIN_REQUEST,
-		payload: id
+		type: LOAD_ARTICLES_ADMIN_REQUEST
 	}
 };

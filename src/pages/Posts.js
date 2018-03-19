@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import {ButtonGroup, Modal} from 'react-bootstrap';
+import {connect} from 'react-redux';
+import _ from 'lodash';
+
 import Button from '../components/Button';
 import AddPostForm from '../components/forms/AddPostForm';
-import {connect} from 'react-redux';
-import {addPost,loadArticlesAdmin} from '../actions';
+import {Post} from '../components/Post';
+import {addPost, loadArticlesAdmin} from '../actions';
 
 class Posts extends Component {
 
@@ -27,14 +30,14 @@ class Posts extends Component {
 			idAuthor: _id
 		};
 		const data = Object.assign({}, infoAuthor, values);
-		this.props.addPost(data);
 		if (values.title.trim().length && values.body.trim().length) {
+			this.props.addPost(data);
 			this.handleClose();
 		}
 	};
 
 	componentDidMount() {
-		if(this.props.user.info._id){
+		if (this.props.user.info._id) {
 			this.props.loadArticlesAdmin();
 		}
 	}
@@ -57,18 +60,26 @@ class Posts extends Component {
 	render() {
 		return (
 			<div className='container-fluid'>
-				<ButtonGroup style={{margin: '15px 0'}}>
-					<Button label='Создать пост' type='success' onClick={this.handleShow}/>
-					{this.modal()}
-				</ButtonGroup>
-				{console.log(this.props.articles)}
+				<div className="row">
+					<div className="col-md-12">
+						<ButtonGroup style={{margin: '15px 0'}}>
+							<Button label='Создать пост' type='success' onClick={this.handleShow}/>
+							{this.modal()}
+						</ButtonGroup>
+					</div>
+					<div className="posts__wrapper">
+						{_.map(this.props.articles.post, (post) => {
+							return <Post key={post._id} {...post} />
+						})}
+					</div>
+				</div>
 			</div>
 		)
 	}
 }
 
-const mapStateToProps = ({user,articles}) => {
-	return {user,articles};
+const mapStateToProps = ({user, articles}) => {
+	return {user, articles};
 };
 
-export default connect(mapStateToProps, {addPost,loadArticlesAdmin})(Posts);
+export default connect(mapStateToProps, {addPost, loadArticlesAdmin})(Posts);
