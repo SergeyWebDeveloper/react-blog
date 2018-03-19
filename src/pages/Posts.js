@@ -7,7 +7,7 @@ import Button from '../components/Button';
 import AddPostForm from '../components/forms/AddPostForm';
 import {Post} from '../components/Post';
 import {Loader} from '../components/Loader';
-import {addPost, loadArticlesAdmin} from '../actions';
+import {addPost, loadArticlesAdmin, deletePost} from '../actions';
 
 class Posts extends Component {
 
@@ -41,7 +41,11 @@ class Posts extends Component {
 		if (this.props.user.info._id) {
 			this.props.loadArticlesAdmin();
 		}
-	}
+	};
+
+	handleDeletePost = (id) => {
+		this.props.deletePost(id);
+	};
 
 	modal = () => {
 		return (
@@ -71,7 +75,7 @@ class Posts extends Component {
 					{this.props.articles.loading && <Loader/>}
 					<div className="posts__wrapper">
 						{_.map(this.props.articles.post, (post) => {
-							return <Post key={post._id} {...post} />
+							return <Post handleDeletePost={this.handleDeletePost} key={post._id} {...post} />
 						})}
 					</div>
 				</div>
@@ -84,4 +88,4 @@ const mapStateToProps = ({user, articles}) => {
 	return {user, articles};
 };
 
-export default connect(mapStateToProps, {addPost, loadArticlesAdmin})(Posts);
+export default connect(mapStateToProps, {addPost, loadArticlesAdmin, deletePost})(Posts);

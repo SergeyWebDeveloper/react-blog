@@ -29,3 +29,8 @@ export async function loadArticlesAdmin() {
 	return await axios.get('/api/adminpost')
 		.then(response=>response);
 }
+
+export async function removePost(id) {
+	return await axios.post('/api/deletepost',{id})
+		.then(response=>response);
+}

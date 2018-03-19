@@ -3,7 +3,8 @@ import {
 	CURRENT_USER_REQUEST,
 	EXIT_ACCOUNT_REQUEST,
 	ADD_POST_REQUEST,
-	LOAD_ARTICLES_ADMIN_REQUEST
+	LOAD_ARTICLES_ADMIN_REQUEST,
+	DELETE_POST_REQUEST
 } from '../constants';
 
 export const signInUser = value => {
@@ -35,5 +36,12 @@ export const addPost = (info) => {
 export const loadArticlesAdmin = () => {
 	return {
 		type: LOAD_ARTICLES_ADMIN_REQUEST
+	}
+};
+
+export const deletePost = (id) => {
+	return {
+		type: DELETE_POST_REQUEST,
+		payload: id
 	}
 };

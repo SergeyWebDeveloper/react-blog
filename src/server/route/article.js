@@ -23,5 +23,12 @@ export const articleRouting = app => {
 				res.send({error: false});
 			}
 		});
-	})
+	});
+
+	app.post('/api/deletepost',(req,res)=>{
+		console.log('DELETE',req.body.id);
+		Article.findOne({_id: req.body.id}).remove((err)=>{
+			err ? res.send({error: true}) : res.send({error: false});
+		});
+	});
 };
