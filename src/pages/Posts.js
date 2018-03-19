@@ -35,7 +35,7 @@ class Posts extends Component {
 
 	componentDidMount() {
 		if(this.props.user.info._id){
-			this.props.loadArticlesAdmin(this.props.user.info._id);
+			this.props.loadArticlesAdmin();
 		}
 	}
 
@@ -61,7 +61,7 @@ class Posts extends Component {
 					<Button label='Создать пост' type='success' onClick={this.handleShow}/>
 					{this.modal()}
 				</ButtonGroup>
-
+				{console.log(this.props.articles)}
 			</div>
 		)
 	}

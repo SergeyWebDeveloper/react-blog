@@ -1,4 +1,5 @@
 import {User} from '../models/user';
+import {Article} from '../models/article';
 import {verificationUser} from '../middlewars/verificationUser';
 import passport from "passport/lib/index";
 
@@ -31,9 +32,15 @@ export const userRouting = app => {
 		res.send({exit: true})
 	});
 
-	app.post('/api/adminpost',(req,res)=>{
-		console.log(req.body);
-		res.send({success: true});
+	app.get('/api/adminpost', async (req,res)=>{
+		const user = await User.findOne({ _id: req.user._id },(err)=>{
+			if(err) res.send({error: true});
+		});
+		const articles = await Article.find({ _id: { $in: user.posts } });
+		res.send({
+			error: false,
+			articles
+		});
 	});
 
 };

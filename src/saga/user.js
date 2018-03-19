@@ -45,8 +45,16 @@ export function* exitAccount() {
 	}
 }
 
-export function* fetchArticlesAdmin(action) {
-	console.log('ID',action.payload);
-	const {data} = yield call(loadArticlesAdmin,action.payload);
-	console.log(data);
+export function* fetchArticlesAdmin() {
+	const {data} = yield call(loadArticlesAdmin);
+	if(!data.error){
+		yield put({
+			type: LOAD_ARTICLES_ADMIN_SUCCESS,
+			payload: data.articles
+		});
+	} else {
+		yield put({
+			type: LOAD_ARTICLES_ADMIN_FAIL
+		});
+	}
 }
