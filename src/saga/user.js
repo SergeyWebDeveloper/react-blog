@@ -2,16 +2,13 @@ import {put, call} from 'redux-saga/effects';
 import {
 	FETCH_USER__SUCCESS,
 	CURRENT_USER_SUCCESS,
-	EXIT_ACCOUNT_SUCCESS,
-	LOAD_ARTICLES_SUCCESS,
-	LOAD_ARTICLES_FAIL
+	EXIT_ACCOUNT_SUCCESS
 } from '../constants';
 
 import {
 	loginUser,
 	checkCurrentUser,
-	exitUser,
-	loadArticlesAdmin
+	exitUser
 } from "../api";
 
 
@@ -41,20 +38,6 @@ export function* exitAccount() {
 	if(data.exit){
 		yield put({
 			type: EXIT_ACCOUNT_SUCCESS
-		});
-	}
-}
-
-export function* fetchArticlesAdmin() {
-	const {data} = yield call(loadArticlesAdmin);
-	if(!data.error){
-		yield put({
-			type: LOAD_ARTICLES_SUCCESS,
-			payload: data.articles
-		});
-	} else {
-		yield put({
-			type: LOAD_ARTICLES_FAIL
 		});
 	}
 }

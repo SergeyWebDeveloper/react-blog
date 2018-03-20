@@ -15,7 +15,7 @@ class HomePage extends Component {
 			<div className='container-fluid'>
 				<div className="row">
 					<div className="col-md-12">
-						<h1>Главная страница</h1>
+						<h1>{this.props.title}</h1>
 					</div>
 					<div className="posts__main">
 						{_.map(this.props.articles.post, (post) => {
@@ -27,6 +27,10 @@ class HomePage extends Component {
 		)
 	}
 }
+
+HomePage.defaultProps = {
+	title: 'Главная страница'
+};
 
 const mapStateToProps = ({articles}) => {
 	return {articles};
