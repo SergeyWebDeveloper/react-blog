@@ -1,11 +1,13 @@
 import {
 	ADD_POST_SUCCESS,
 	ADD_POST_FAIL,
-	LOAD_ARTICLES_ADMIN_REQUEST,
+	LOAD_ARTICLES_REQUEST,
 	DELETE_POST_SUCCESS,
-	DELETE_POST_FAIL
+	DELETE_POST_FAIL,
+	LOAD_ARTICLES_SUCCESS,
+	LOAD_ARTICLES_FAIL
 } from '../constants';
-import {createPost,removePost} from '../api';
+import {createPost,removePost,loadArticles} from '../api';
 
 import {call, put} from 'redux-saga/effects';
 
@@ -16,7 +18,7 @@ export function* addPost(action) {
 			type: ADD_POST_SUCCESS
 		});
 		yield put({
-			type: LOAD_ARTICLES_ADMIN_REQUEST
+			type: LOAD_ARTICLES_REQUEST
 		});
 	} else {
 		yield put({
@@ -32,11 +34,25 @@ export function* deletePost(action) {
 			type: DELETE_POST_SUCCESS
 		});
 		yield put({
-			type: LOAD_ARTICLES_ADMIN_REQUEST
+			type: LOAD_ARTICLES_REQUEST
 		});
 	} else {
 		yield put({
 			type: DELETE_POST_FAIL
+		});
+	}
+}
+
+export function* loadPost() {
+	const {data} = yield call(loadArticles);
+	if(!data.error){
+		yield put({
+			type: LOAD_ARTICLES_SUCCESS,
+			payload: data.posts
+		});
+	} else {
+		yield put({
+			type: LOAD_ARTICLES_FAIL
 		});
 	}
 }

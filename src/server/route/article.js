@@ -3,7 +3,6 @@ import {User} from '../models/user';
 
 export const articleRouting = app => {
 	app.post('/api/newpost', (req, res) => {
-		console.log(req.body);
 		const post = new Article({
 			author: req.body.author,
 			date: req.body.date,
@@ -26,9 +25,14 @@ export const articleRouting = app => {
 	});
 
 	app.post('/api/deletepost',(req,res)=>{
-		console.log('DELETE',req.body.id);
 		Article.findOne({_id: req.body.id}).remove((err)=>{
 			err ? res.send({error: true}) : res.send({error: false});
 		});
 	});
+
+	app.get('/api/posts',async (req,res)=>{
+		const posts = await Article.find().sort({date: 'desc'}).limit(6);
+		res.send({error: false,posts});
+	});
+
 };

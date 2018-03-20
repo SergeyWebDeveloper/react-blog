@@ -34,3 +34,8 @@ export async function removePost(id) {
 	return await axios.post('/api/deletepost',{id})
 		.then(response=>response);
 }
+
+export async function loadArticles() {
+	return await axios.get('/api/posts')
+		.then(response=>response);
+}

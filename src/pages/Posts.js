@@ -7,7 +7,7 @@ import Button from '../components/Button';
 import AddPostForm from '../components/forms/AddPostForm';
 import {Post} from '../components/Post';
 import {Loader} from '../components/Loader';
-import {addPost, loadArticlesAdmin, deletePost} from '../actions';
+import {addPost, loadArticles, deletePost} from '../actions';
 
 class Posts extends Component {
 
@@ -39,7 +39,7 @@ class Posts extends Component {
 
 	componentDidMount() {
 		if (this.props.user.info._id) {
-			this.props.loadArticlesAdmin();
+			this.props.loadArticles();
 		}
 	};
 
@@ -62,6 +62,20 @@ class Posts extends Component {
 		)
 	};
 
+	renderPosts = () => {
+		return _.map(this.props.articles.post, (post) => {
+			return <Post handleDeletePost={this.handleDeletePost} key={post._id} {...post} />
+		})
+	};
+
+	renderMessageIfNotPosts= () => {
+		return(
+			<div className='col-md-12'>
+				<h4>Постов пока нет, но вы можете все исправить.</h4>
+			</div>
+		)
+	};
+
 	render() {
 		return (
 			<div className='container-fluid'>
@@ -74,9 +88,7 @@ class Posts extends Component {
 					</div>
 					{this.props.articles.loading && <Loader/>}
 					<div className="posts__wrapper">
-						{_.map(this.props.articles.post, (post) => {
-							return <Post handleDeletePost={this.handleDeletePost} key={post._id} {...post} />
-						})}
+						{this.props.articles.post.length ? this.renderPosts() : this.renderMessageIfNotPosts()}
 					</div>
 				</div>
 			</div>
@@ -88,4 +100,4 @@ const mapStateToProps = ({user, articles}) => {
 	return {user, articles};
 };
 
-export default connect(mapStateToProps, {addPost, loadArticlesAdmin, deletePost})(Posts);
+export default connect(mapStateToProps, {addPost, loadArticles, deletePost})(Posts);

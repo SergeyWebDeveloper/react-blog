@@ -17,7 +17,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(expressSession({ secret: key.secretCookie, resave: false, saveUninitialized: false }));
+app.use(expressSession({ secret: key.secretCookie, resave: false, saveUninitialized: false, cookie:{maxAge: 30 * 24 * 60 * 60 * 1000} }));
 app.use(passport.initialize());
 app.use(passport.session());
 
