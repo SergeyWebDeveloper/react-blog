@@ -14,7 +14,7 @@ export const articleRouting = app => {
 				res.send({error: true});
 			}
 			else {
-				User.findByIdAndUpdate(req.body.idAuthor, {$push: {posts: post._id}}, function (err) {
+				User.findByIdAndUpdate(req.body.idAuthor, {$push: {posts: post._id}}, (err) => {
 					if (err) {
 						res.send({error: true});
 					}
@@ -24,10 +24,10 @@ export const articleRouting = app => {
 		});
 	});
 
-	app.post('/api/deletepost',(req,res)=>{
-		Article.findOne({_id: req.body.id}).remove((err)=>{
-			err ? res.send({error: true}) : res.send({error: false});
-		});
+	app.post('/api/deletepost',async (req,res)=>{
+		await User.update({_id: req.user._id}, {$pull: {posts: {oid: req.body.id}}});
+		await Article.findOne({_id: req.body.id}).remove();
+		res.send({error: false});
 	});
 
 	app.get('/api/posts',async (req,res)=>{

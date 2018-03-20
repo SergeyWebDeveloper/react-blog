@@ -2,12 +2,14 @@ export const fieldSignUp = [
 	{
 		name: 'name',
 		id: 'fieldName',
-		label: 'Ваше имя'
+		label: 'Ваше имя',
+		required: true
 	},
 	{
 		name: 'family',
 		id: 'fieldFamily',
-		label: 'Ваша фамилия'
+		label: 'Ваша фамилия',
+		required: true
 	},
 	{
 		name: 'login',
