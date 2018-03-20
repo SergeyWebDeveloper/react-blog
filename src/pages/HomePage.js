@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 
 import {Post} from '../components/Post';
+import {Loader} from '../components/Loader';
 
 class HomePage extends Component {
 	componentDidMount() {
@@ -17,6 +18,7 @@ class HomePage extends Component {
 					<div className="col-md-12">
 						<h1>{this.props.title}</h1>
 					</div>
+					{this.props.articles.loading && <Loader/>}
 					<div className="posts__main">
 						{_.map(this.props.articles.post, (post) => {
 							return <Post mainPage key={post._id} {...post} />

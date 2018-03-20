@@ -7,7 +7,7 @@ import Button from '../components/Button';
 import AddPostForm from '../components/forms/AddPostForm';
 import {Post} from '../components/Post';
 import {Loader} from '../components/Loader';
-import {addPost, loadArticles, deletePost} from '../actions';
+import {addPost, loadArticlesAdmin, deletePost} from '../actions';
 
 class Posts extends Component {
 
@@ -39,7 +39,7 @@ class Posts extends Component {
 
 	componentDidMount() {
 		if (this.props.user.info._id) {
-			this.props.loadArticles();
+			this.props.loadArticlesAdmin();
 		}
 	};
 
@@ -100,4 +100,4 @@ const mapStateToProps = ({user, articles}) => {
 	return {user, articles};
 };
 
-export default connect(mapStateToProps, {addPost, loadArticles, deletePost})(Posts);
+export default connect(mapStateToProps, {addPost, loadArticlesAdmin, deletePost})(Posts);

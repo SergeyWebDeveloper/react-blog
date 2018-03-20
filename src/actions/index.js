@@ -3,6 +3,7 @@ import {
 	CURRENT_USER_REQUEST,
 	EXIT_ACCOUNT_REQUEST,
 	ADD_POST_REQUEST,
+	LOAD_ARTICLES_ADMIN_REQUEST,
 	DELETE_POST_REQUEST,
 	LOAD_ARTICLES_REQUEST
 } from '../constants';
@@ -33,11 +34,11 @@ export const addPost = (info) => {
 	}
 };
 
-// export const loadArticlesAdmin = () => {
-// 	return {
-// 		type: LOAD_ARTICLES_ADMIN_REQUEST
-// 	}
-// };
+export const loadArticlesAdmin = () => {
+	return {
+		type: LOAD_ARTICLES_ADMIN_REQUEST
+	}
+};
 
 export const deletePost = (id) => {
 	return {
@@ -50,4 +51,4 @@ export const loadArticles = () => {
 	return {
 		type: LOAD_ARTICLES_REQUEST
 	}
-};
+}

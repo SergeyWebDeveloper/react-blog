@@ -32,16 +32,16 @@ export const userRouting = app => {
 		res.send({exit: true})
 	});
 
-	// app.get('/api/adminpost', async (req,res)=>{
-	// 	const user = await User.findOne({ _id: req.user._id },(err)=>{
-	// 		if(err) res.send({error: true});
-	// 	});
-	// 	const articles = await Article.find({ _id: { $in: user.posts } }).sort({date: 'desc'}).limit(6);
-	// 	res.send({
-	// 		error: false,
-	// 		articles
-	// 	});
-	// });
+	app.get('/api/adminpost', async (req,res)=>{
+		const user = await User.findOne({ _id: req.user._id },(err)=>{
+			if(err) res.send({error: true});
+		});
+		const articles = await Article.find({ _id: { $in: user.posts } }).sort({date: 'desc'}).limit(6);
+		res.send({
+			error: false,
+			articles
+		});
+	});
 
 };
 

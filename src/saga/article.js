@@ -1,11 +1,11 @@
 import {
 	ADD_POST_SUCCESS,
 	ADD_POST_FAIL,
-	LOAD_ARTICLES_REQUEST,
 	DELETE_POST_SUCCESS,
 	DELETE_POST_FAIL,
 	LOAD_ARTICLES_SUCCESS,
-	LOAD_ARTICLES_FAIL
+	LOAD_ARTICLES_FAIL,
+	LOAD_ARTICLES_ADMIN_REQUEST
 } from '../constants';
 import {createPost,removePost,loadArticles} from '../api';
 
@@ -18,7 +18,7 @@ export function* addPost(action) {
 			type: ADD_POST_SUCCESS
 		});
 		yield put({
-			type: LOAD_ARTICLES_REQUEST
+			type: LOAD_ARTICLES_ADMIN_REQUEST
 		});
 	} else {
 		yield put({
@@ -34,7 +34,7 @@ export function* deletePost(action) {
 			type: DELETE_POST_SUCCESS
 		});
 		yield put({
-			type: LOAD_ARTICLES_REQUEST
+			type: LOAD_ARTICLES_ADMIN_REQUEST
 		});
 	} else {
 		yield put({
