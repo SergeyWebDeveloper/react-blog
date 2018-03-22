@@ -35,4 +35,16 @@ export const articleRouting = app => {
 		res.send({error: false,posts});
 	});
 
+	app.post('/api/editpost', (req,res)=>{
+		Article.findByIdAndUpdate(
+			req.body.id,
+			{date: req.body.data.date,title:req.body.data.title,body:req.body.data.body}, (err)=>{
+			if(err) {
+				res.send({error: true})
+			} else {
+				res.send({error: false});
+			}
+		});
+	});
+
 };

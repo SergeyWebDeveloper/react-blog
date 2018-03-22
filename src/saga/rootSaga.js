@@ -6,7 +6,8 @@ import {
 	ADD_POST_REQUEST,
 	LOAD_ARTICLES_ADMIN_REQUEST,
 	DELETE_POST_REQUEST,
-	LOAD_ARTICLES_REQUEST
+	LOAD_ARTICLES_REQUEST,
+	EDIT_POST_REQUEST
 } from '../constants';
 
 import {
@@ -16,7 +17,7 @@ import {
 	fetchArticlesAdmin
 } from './user';
 
-import {addPost,deletePost,loadPost} from './article';
+import {addPost,deletePost,loadPost,editPost} from './article';
 
 export function* rootSaga() {
 	yield takeEvery(FETCH_USER__REQUEST,userInfo);
@@ -26,4 +27,5 @@ export function* rootSaga() {
 	yield takeEvery(LOAD_ARTICLES_ADMIN_REQUEST,fetchArticlesAdmin);
 	yield takeEvery(DELETE_POST_REQUEST,deletePost);
 	yield takeEvery(LOAD_ARTICLES_REQUEST,loadPost);
+	yield takeEvery(EDIT_POST_REQUEST,editPost);
 }

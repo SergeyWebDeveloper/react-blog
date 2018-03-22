@@ -5,7 +5,7 @@ import moment from 'moment';
 import Button from '../components/Button';
 
 export const Post = ({title, body, date, author, _id, mainPage, ...props}) => {
-	const {handleDeletePost} = props;
+	const {deletePost,editPost} = props;
 	return (
 		<div className='col-md-6'>
 			<Jumbotron>
@@ -16,8 +16,8 @@ export const Post = ({title, body, date, author, _id, mainPage, ...props}) => {
 				{
 					!mainPage &&
 					<ButtonGroup>
-						<Button label='Удалить' type='danger' onClick={handleDeletePost.bind(null, _id)}/>
-						<Button label='Редактировать' type='success'/>
+						<Button label='Удалить' type='danger' onClick={deletePost.bind(null, _id)}/>
+						<Button label='Редактировать' type='success' onClick={editPost.bind(null, _id)} />
 					</ButtonGroup>
 				}
 			</Jumbotron>

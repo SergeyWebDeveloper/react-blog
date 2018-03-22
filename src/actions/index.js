@@ -5,7 +5,8 @@ import {
 	ADD_POST_REQUEST,
 	LOAD_ARTICLES_ADMIN_REQUEST,
 	DELETE_POST_REQUEST,
-	LOAD_ARTICLES_REQUEST
+	LOAD_ARTICLES_REQUEST,
+	EDIT_POST_REQUEST
 } from '../constants';
 
 export const signInUser = value => {
@@ -51,4 +52,11 @@ export const loadArticles = () => {
 	return {
 		type: LOAD_ARTICLES_REQUEST
 	}
-}
+};
+
+export const editPost = (id,data) => {
+	return {
+		type: EDIT_POST_REQUEST,
+		payload: {id,data}
+	}
+};

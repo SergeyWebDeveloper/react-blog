@@ -5,9 +5,16 @@ import {
 	DELETE_POST_FAIL,
 	LOAD_ARTICLES_SUCCESS,
 	LOAD_ARTICLES_FAIL,
-	LOAD_ARTICLES_ADMIN_REQUEST
+	LOAD_ARTICLES_ADMIN_REQUEST,
+	EDIT_POST_SUCCESS,
+	EDIT_POST_FAILURE
 } from '../constants';
-import {createPost,removePost,loadArticles} from '../api';
+import {
+	createPost,
+	removePost,
+	loadArticles,
+	changePost
+} from '../api';
 
 import {call, put} from 'redux-saga/effects';
 
@@ -53,6 +60,20 @@ export function* loadPost() {
 	} else {
 		yield put({
 			type: LOAD_ARTICLES_FAIL
+		});
+	}
+}
+
+export function* editPost(action) {
+	const {data} = yield call(changePost,action.payload.id,action.payload.data);
+	if(!data.error){
+		yield put({
+			type: EDIT_POST_SUCCESS,
+			payload: {id:action.payload.id,post: action.payload.data}
+		});
+	} else {
+		yield put({
+			type: EDIT_POST_FAILURE
 		});
 	}
 }

@@ -7,12 +7,16 @@ import Button from '../components/Button';
 import AddPostForm from '../components/forms/AddPostForm';
 import {Post} from '../components/Post';
 import {Loader} from '../components/Loader';
-import {addPost, loadArticlesAdmin, deletePost} from '../actions';
+import {addPost, loadArticlesAdmin, deletePost, editPost} from '../actions';
 
 class Posts extends Component {
 
 	state = {
-		show: false
+		show: false,
+		edit: {
+			status: false,
+			id: null
+		}
 	};
 
 	handleClose = () => {
@@ -32,8 +36,14 @@ class Posts extends Component {
 		};
 		const data = Object.assign({}, infoAuthor, values);
 		if (values.title.trim().length && values.body.trim().length) {
-			this.props.addPost(data);
+			this.state.edit.status ? this.props.editPost(this.state.edit.id,data) : this.props.addPost(data);
 			this.handleClose();
+			this.setState({
+				edit: {
+					status: false,
+					id: null
+				}
+			})
 		}
 	};
 
@@ -46,6 +56,18 @@ class Posts extends Component {
 	handleDeletePost = (id) => {
 		this.props.deletePost(id);
 	};
+
+	handleEditPost = (id) => {
+		this.setState({
+			edit: {
+				status: true,
+				id
+			}
+		});
+		this.handleShow();
+	};
+
+
 
 	modal = () => {
 		return (
@@ -64,7 +86,7 @@ class Posts extends Component {
 
 	renderPosts = () => {
 		return _.map(this.props.articles.post, (post) => {
-			return <Post handleDeletePost={this.handleDeletePost} key={post._id} {...post} />
+			return <Post editPost={this.handleEditPost} deletePost={this.handleDeletePost} key={post._id} {...post} />
 		})
 	};
 
@@ -88,6 +110,7 @@ class Posts extends Component {
 					</div>
 					{this.props.articles.loading && <Loader/>}
 					<div className="posts__wrapper">
+						{console.log('11111',this.props.articles.post)}
 						{this.props.articles.post.length ? this.renderPosts() : this.renderMessageIfNotPosts()}
 					</div>
 				</div>
@@ -100,4 +123,4 @@ const mapStateToProps = ({user, articles}) => {
 	return {user, articles};
 };
 
-export default connect(mapStateToProps, {addPost, loadArticlesAdmin, deletePost})(Posts);
+export default connect(mapStateToProps, {addPost, loadArticlesAdmin, deletePost, editPost})(Posts);

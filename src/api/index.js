@@ -39,3 +39,8 @@ export async function loadArticles() {
 	return await axios.get('/api/posts')
 		.then(response=>response);
 }
+
+export async function changePost(id,data) {
+	return await axios.post('/api/editpost',{id,data})
+		.then(response=>response);
+}
