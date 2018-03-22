@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
 	EXIT_ACCOUNT_SUCCESS,
 	LOAD_ARTICLES_SUCCESS,
@@ -13,7 +14,7 @@ const initialState = {
 };
 
 const editPost = (state,payload) => {
-	return state.post.map((post) => {
+	return _.map(state.post,(post) => {
 		if (post._id === payload.id) {
 			return Object.assign(
 				{},
@@ -30,9 +31,10 @@ const editPost = (state,payload) => {
 };
 
 const sortPostDate = (posts) => {
-	return posts.sort((a,b)=>{
-		return b.date-a.date;
-	});
+	// return posts.sort((a,b)=>{
+	// 	return b.date-a.date;
+	// });
+	return _.orderBy(posts,['date'],['desc']);
 };
 
 export const articles = (state = initialState, {type, payload}) => {
