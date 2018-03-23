@@ -7,6 +7,7 @@ import Button from '../components/Button';
 import AddPostForm from '../components/forms/AddPostForm';
 import {Post} from '../components/Post';
 import {Loader} from '../components/Loader';
+import {Paginate} from '../components/Paginate';
 import {addPost, loadArticlesAdmin, deletePost, editPost} from '../actions';
 
 class Posts extends Component {
@@ -36,7 +37,7 @@ class Posts extends Component {
 		};
 		const data = Object.assign({}, infoAuthor, values);
 		if (values.title.trim().length && values.body.trim().length) {
-			this.state.edit.status ? this.props.editPost(this.state.edit.id,data) : this.props.addPost(data);
+			this.state.edit.status ? this.props.editPost(this.state.edit.id, data) : this.props.addPost(data);
 			this.handleClose();
 			this.setState({
 				edit: {
@@ -68,7 +69,6 @@ class Posts extends Component {
 	};
 
 
-
 	modal = () => {
 		return (
 			<div>
@@ -90,8 +90,8 @@ class Posts extends Component {
 		})
 	};
 
-	renderMessageIfNotPosts= () => {
-		return(
+	renderMessageIfNotPosts = () => {
+		return (
 			<div className='col-md-12'>
 				<h4>Постов пока нет, но вы можете все исправить.</h4>
 			</div>
@@ -100,20 +100,18 @@ class Posts extends Component {
 
 	render() {
 		return (
-			<div className='container-fluid'>
-				<div className="row">
-					<div className="col-md-12">
-						<ButtonGroup style={{margin: '15px 0'}}>
-							<Button label='Создать пост' type='success' onClick={this.handleShow}/>
-							{this.modal()}
-						</ButtonGroup>
-					</div>
-					{this.props.articles.loading && <Loader/>}
-					<div className="posts__wrapper">
-						{console.log('11111',this.props.articles.post)}
-						{this.props.articles.post.length ? this.renderPosts() : this.renderMessageIfNotPosts()}
-					</div>
+			<div className="row">
+				<div className="col-md-12">
+					<ButtonGroup style={{margin: '15px 0'}}>
+						<Button label='Создать пост' type='success' onClick={this.handleShow}/>
+						{this.modal()}
+					</ButtonGroup>
 				</div>
+				{this.props.articles.loading && <Loader/>}
+				<div className="posts__wrapper">
+					{this.props.articles.post.length ? this.renderPosts() : this.renderMessageIfNotPosts()}
+				</div>
+				<Paginate/>
 			</div>
 		)
 	}

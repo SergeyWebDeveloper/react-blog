@@ -36,7 +36,7 @@ export const userRouting = app => {
 		const user = await User.findOne({ _id: req.user._id },(err)=>{
 			if(err) res.send({error: true});
 		});
-		const articles = await Article.find({ _id: { $in: user.posts } }).sort({date: 'desc'}).limit(6);
+		const articles = await Article.find({ _id: { $in: user.posts } }).sort({date: 'desc'}).limit(4);
 		res.send({
 			error: false,
 			articles

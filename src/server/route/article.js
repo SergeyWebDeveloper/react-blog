@@ -31,7 +31,7 @@ export const articleRouting = app => {
 	});
 
 	app.get('/api/posts',async (req,res)=>{
-		const posts = await Article.find().sort({date: 'desc'}).limit(6);
+		const posts = await Article.find().sort({date: 'desc'}).limit(4);
 		res.send({error: false,posts});
 	});
 

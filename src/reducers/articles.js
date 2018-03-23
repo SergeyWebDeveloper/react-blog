@@ -31,9 +31,6 @@ const editPost = (state,payload) => {
 };
 
 const sortPostDate = (posts) => {
-	// return posts.sort((a,b)=>{
-	// 	return b.date-a.date;
-	// });
 	return _.orderBy(posts,['date'],['desc']);
 };
 
